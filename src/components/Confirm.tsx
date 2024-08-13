@@ -11,11 +11,11 @@ const ModalContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1001;
+  /* z-index: 1001; */
 `;
 
 const Transparent = styled(ModalContainer)`
-  background-color: transparent;
+  background-color: #6b4c4c;
 `;
 
 const ModalContent = styled.div`

@@ -10,6 +10,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import ConfirmationModal from "./Confirm";
 import styled from "styled-components";
+import useMediaQuery from "../hook/useMediaQuery";
 import { useState } from "react";
 import { useUser } from "../store/useUser";
 
@@ -124,6 +125,8 @@ const Sidebar = () => {
   const navigate = useNavigate();
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
 
+  const isMobile = useMediaQuery("(max-width: 780px)");
+
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
@@ -204,7 +207,11 @@ const Sidebar = () => {
           className={isActiveLink(link.link!) ? "active" : ""}
           isActive={isActiveLink(link.link!)}
           onClick={
-            link.type === "button" ? link.onClick : () => navigate(link.link!)
+            !isMobile && link.type === "button"
+              ? link.onClick
+              : isMobile && link.type === "button"
+              ? logOut
+              : () => navigate(link.link!)
           }
         >
           {isActiveLink(link.link!) && <div className="border" />}
